@@ -5,6 +5,8 @@
  */
 package programaciondinamica2016;
 
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +22,16 @@ public class Calculadora extends javax.swing.JFrame {
      */
     public Calculadora() {
         initComponents();
+        establecerIcono();
+    }
+    
+    /**
+     * Establece el ícono del JFrame
+     */
+    private void establecerIcono() {
+        URL ruta = getClass().getResource("/res/icono.png");
+        ImageIcon icono = new ImageIcon(ruta);
+        this.setIconImage(icono.getImage());
     }
     
     /**
@@ -55,6 +67,7 @@ public class Calculadora extends javax.swing.JFrame {
 
         bgValores = new javax.swing.ButtonGroup();
         bgFórmulas = new javax.swing.ButtonGroup();
+        jMenu1 = new javax.swing.JMenu();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         rbMáximos = new javax.swing.JRadioButton();
@@ -78,11 +91,24 @@ public class Calculadora extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbDatos = new javax.swing.JTable();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
         menuAjustes = new javax.swing.JMenu();
         itemFuente = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         menuAcercaDe = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Programación Dinámica");
@@ -108,12 +134,12 @@ public class Calculadora extends javax.swing.JFrame {
 
         bgFórmulas.add(rbFórmula1);
         rbFórmula1.setSelected(true);
-        rbFórmula1.setText("Fórmula 1");
+        rbFórmula1.setText("Dinámica");
         rbFórmula1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rbFórmula1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         bgFórmulas.add(rbFórmula2);
-        rbFórmula2.setText("Fórmula 2");
+        rbFórmula2.setText("Determinística");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -151,7 +177,7 @@ public class Calculadora extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbFórmula1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbFórmula2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -261,7 +287,6 @@ public class Calculadora extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jScrollPane2.setAutoscrolls(true);
-        jScrollPane2.setColumnHeader(null);
 
         tbDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -278,29 +303,69 @@ public class Calculadora extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
+        jToolBar2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jToolBar2.setRollover(true);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/ejecutar.png"))); // NOI18N
+        jButton1.setText("Ejecutar");
+        jButton1.setToolTipText("Ejecutar");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton1);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/alejar.png"))); // NOI18N
+        jButton2.setText("Alejar");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton2);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/acercar.png"))); // NOI18N
+        jButton3.setText("Acercar");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton3);
+
         menuArchivo.setText("Archivo");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/ejecutar.png"))); // NOI18N
+        jMenuItem1.setText("Ejecutar");
+        menuArchivo.add(jMenuItem1);
+        menuArchivo.add(jSeparator3);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/salir.png"))); // NOI18N
+        jMenuItem2.setText("Salir");
+        menuArchivo.add(jMenuItem2);
+
         jMenuBar1.add(menuArchivo);
 
         menuAjustes.setText("Ajustes");
 
+        itemFuente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        itemFuente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/fuente.png"))); // NOI18N
         itemFuente.setText("Fuente");
         itemFuente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,10 +373,27 @@ public class Calculadora extends javax.swing.JFrame {
             }
         });
         menuAjustes.add(itemFuente);
+        menuAjustes.add(jSeparator2);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_MINUS, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/alejar.png"))); // NOI18N
+        jMenuItem3.setText("Alejar");
+        menuAjustes.add(jMenuItem3);
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_PLUS, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/acercar.png"))); // NOI18N
+        jMenuItem4.setText("Acercar");
+        menuAjustes.add(jMenuItem4);
 
         jMenuBar1.add(menuAjustes);
 
         menuAcercaDe.setText("Acerca de");
+
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/Créditos.png"))); // NOI18N
+        jMenuItem5.setText("Créditos");
+        menuAcercaDe.add(jMenuItem5);
+
         jMenuBar1.add(menuAcercaDe);
 
         setJMenuBar(jMenuBar1);
@@ -326,17 +408,22 @@ public class Calculadora extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        setSize(new java.awt.Dimension(726, 445));
+        setSize(new java.awt.Dimension(726, 479));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -420,6 +507,9 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgFórmulas;
     private javax.swing.ButtonGroup bgValores;
     private javax.swing.JMenuItem itemFuente;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -427,18 +517,23 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JList<String> lsFuente;
-    private javax.swing.JList<String> lsFuente1;
+    private javax.swing.JToolBar jToolBar2;
     private javax.swing.JMenu menuAcercaDe;
     private javax.swing.JMenu menuAjustes;
     private javax.swing.JMenu menuArchivo;

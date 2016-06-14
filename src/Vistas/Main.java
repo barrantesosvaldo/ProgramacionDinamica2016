@@ -1,10 +1,13 @@
+package Vistas;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package programaciondinamica2016;
 
+
+import Vistas.Calculadora;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 

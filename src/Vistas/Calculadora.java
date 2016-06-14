@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package programaciondinamica2016;
+package Vistas;
 
 import java.net.URL;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import ProgramacionDinamica.ProgramacionDeterminista;
+import ProgramacionDinamica.ProgramacionDinamica;
 
 /**
  * @description Frame for getting information
@@ -55,6 +59,26 @@ public class Calculadora extends javax.swing.JFrame {
         
         return modelo;
     } 
+    
+    private ArrayList<ArrayList<Integer>> generarTablaOrigenDinamica(){
+        ArrayList<ArrayList<Integer>> tabla = new ArrayList<>();
+        for(int i = 0; i < (int)spEstados.getValue();i++){
+            for(int j = 0; j < (int)spEstados.getValue();j++){
+                tabla.get(i).add((int) tbDatos.getModel().getValueAt(i,j));
+            }
+        }
+        return tabla;
+    }
+    
+    private ArrayList<ArrayList<Double>> generarTablaOrigenDeterminista(){
+        ArrayList<ArrayList<Double>> tabla = new ArrayList<>();
+        for(int i = 0; i < (int)spEstados.getValue();i++){
+            for(int j = 0; j < (int)spEstados.getValue();j++){
+                tabla.get(i).add((double) tbDatos.getModel().getValueAt(i,j));
+            }
+        }
+        return tabla;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -331,6 +355,11 @@ public class Calculadora extends javax.swing.JFrame {
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jToolBar2.add(jButton1);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/alejar.png"))); // NOI18N
@@ -469,6 +498,40 @@ public class Calculadora extends javax.swing.JFrame {
         DefaultTableModel modeloDatos = generarTabla(filas, columnas);
         tbDatos.setModel(modeloDatos);
     }//GEN-LAST:event_spEstadosStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        if((int)spEstados.getValue() == 0 || (int)spEtapas.getValue() == 0){
+            JOptionPane.showMessageDialog(null, "Por favor incluya etapas y estados", "Atencion", JOptionPane.WARNING_MESSAGE); 
+        }
+        else{
+            if(rbMáximos.isSelected()){
+                if(rbFórmula1.isSelected()){
+                    System.out.println("Maximos y Dinamica");
+                    ArrayList<ArrayList<Integer>> tabla = generarTablaOrigenDinamica();
+                    ProgramacionDinamica instancia = new ProgramacionDinamica(true,true,tabla,(int)spEtapas.getValue());
+                }
+                else{
+                    System.out.println("Maximos y Determinista");
+                    ArrayList<ArrayList<Double>> tabla = generarTablaOrigenDeterminista();
+                    ProgramacionDeterminista instancia = new ProgramacionDeterminista(true,false,tabla,(int)spEtapas.getValue());
+                }
+            }
+            else{
+                if(rbFórmula1.isSelected()){
+                    System.out.println("Minimos y Dinamica");
+                    ArrayList<ArrayList<Integer>> tabla = generarTablaOrigenDinamica();
+                    ProgramacionDinamica instancia = new ProgramacionDinamica(false,true,tabla,(int)spEtapas.getValue());
+                }
+                else{
+                    System.out.println("Minimos y Determinista");
+                    ArrayList<ArrayList<Double>> tabla = generarTablaOrigenDeterminista();
+                    ProgramacionDeterminista instancia = new ProgramacionDeterminista(false,false,tabla,(int)spEtapas.getValue());
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

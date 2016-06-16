@@ -63,21 +63,49 @@ public class Calculadora extends javax.swing.JFrame {
     private ArrayList<ArrayList<Integer>> generarTablaOrigenDinamica(){
         ArrayList<ArrayList<Integer>> tabla = new ArrayList<>();
         for(int i = 0; i < (int)spEstados.getValue();i++){
-            for(int j = 0; j < (int)spEstados.getValue();j++){
-                tabla.get(i).add((int) tbDatos.getModel().getValueAt(i,j));
+            ArrayList<Integer> fila = new ArrayList<>();
+            for(int j = 0; j < (int)spEtapas.getValue();j++){
+                fila.add(Integer.parseInt(tbDatos.getModel().getValueAt(i,j).toString()));
             }
+            tabla.add(fila);
         }
         return tabla;
+    }
+    
+    private boolean isTablaConVacios(){
+        for(int i = 0; i < (int)spEstados.getValue();i++){
+            for(int j = 0; j < (int)spEtapas.getValue();j++){
+                if(tbDatos.getModel().getValueAt(i,j).toString().equals("")){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
     private ArrayList<ArrayList<Double>> generarTablaOrigenDeterminista(){
         ArrayList<ArrayList<Double>> tabla = new ArrayList<>();
         for(int i = 0; i < (int)spEstados.getValue();i++){
+            ArrayList<Double> fila = new ArrayList<>();
             for(int j = 0; j < (int)spEstados.getValue();j++){
-                tabla.get(i).add((double) tbDatos.getModel().getValueAt(i,j));
+                fila.add(Double.parseDouble((String) tbDatos.getModel().getValueAt(i,j)));
             }
+            tabla.add(fila);
         }
         return tabla;
+    }
+    
+    private void print(){
+        System.out.println("-----------------------");
+        System.out.println("     Tabla Origen      ");
+        System.out.println("-----------------------");
+        for(int i = 0; i < (int)spEstados.getValue();i++){
+            for(int j = 0; j < (int)spEtapas.getValue();j++){
+                System.out.print(tbDatos.getModel().getValueAt(i,j).toString()+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("-----------------------");
     }
 
     /**
@@ -506,29 +534,42 @@ public class Calculadora extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor incluya etapas y estados", "Atencion", JOptionPane.WARNING_MESSAGE); 
         }
         else{
-            if(rbMáximos.isSelected()){
-                if(rbFórmula1.isSelected()){
-                    System.out.println("Maximos y Dinamica");
-                    ArrayList<ArrayList<Integer>> tabla = generarTablaOrigenDinamica();
-                    ProgramacionDinamica instancia = new ProgramacionDinamica(true,true,tabla,(int)spEtapas.getValue());
+            if(isTablaConVacios()){
+                if(rbMáximos.isSelected()){
+                    if(rbFórmula1.isSelected()){
+                        System.out.println("Maximos y Dinamica");
+                        ArrayList<ArrayList<Integer>> tabla = generarTablaOrigenDinamica();
+                        print();
+                        ProgramacionDinamica instancia = new ProgramacionDinamica(true,true,tabla,(int)spEtapas.getValue());
+                        instancia.iniciar();
+                    }
+                    else{
+                        System.out.println("Maximos y Determinista");
+                        ArrayList<ArrayList<Double>> tabla = generarTablaOrigenDeterminista();
+                        print();
+                        ProgramacionDeterminista instancia = new ProgramacionDeterminista(true,false,tabla,(int)spEtapas.getValue());
+                        instancia.iniciar();
+                    }
                 }
                 else{
-                    System.out.println("Maximos y Determinista");
-                    ArrayList<ArrayList<Double>> tabla = generarTablaOrigenDeterminista();
-                    ProgramacionDeterminista instancia = new ProgramacionDeterminista(true,false,tabla,(int)spEtapas.getValue());
+                    if(rbFórmula1.isSelected()){
+                        System.out.println("Minimos y Dinamica");
+                        ArrayList<ArrayList<Integer>> tabla = generarTablaOrigenDinamica();
+                        print();
+                        ProgramacionDinamica instancia = new ProgramacionDinamica(false,true,tabla,(int)spEtapas.getValue());
+                        instancia.iniciar();
+                    }
+                    else{
+                        System.out.println("Minimos y Determinista");
+                        ArrayList<ArrayList<Double>> tabla = generarTablaOrigenDeterminista();
+                        print();
+                        ProgramacionDeterminista instancia = new ProgramacionDeterminista(false,false,tabla,(int)spEtapas.getValue());
+                        instancia.iniciar();
+                    }
                 }
             }
             else{
-                if(rbFórmula1.isSelected()){
-                    System.out.println("Minimos y Dinamica");
-                    ArrayList<ArrayList<Integer>> tabla = generarTablaOrigenDinamica();
-                    ProgramacionDinamica instancia = new ProgramacionDinamica(false,true,tabla,(int)spEtapas.getValue());
-                }
-                else{
-                    System.out.println("Minimos y Determinista");
-                    ArrayList<ArrayList<Double>> tabla = generarTablaOrigenDeterminista();
-                    ProgramacionDeterminista instancia = new ProgramacionDeterminista(false,false,tabla,(int)spEtapas.getValue());
-                }
+                JOptionPane.showMessageDialog(null, "Por favor no deje datos vacios en la tabla.", "Atencion", JOptionPane.WARNING_MESSAGE); 
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
